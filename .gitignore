@@ -1,0 +1,29 @@
+# Node.js
+node_modules/
+
+# Environment variables
+.env
+
+# Virtual Environment
+venv/
+
+#Python Cache Files
+*.pyc
+__pycache__/
+
+#Database
+db.sqlite3
+
+# Build files
+dist/
+build/
+
+# Logs
+*.log
+
+# VS Code
+.vscode/
+
+# OS files
+.DS_Store
+Thumbs.db
