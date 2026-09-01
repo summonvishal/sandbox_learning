@@ -4,4 +4,5 @@ from . import views
 urlpatterns = [
     # Path for homepage of the blog
     path('', views.home, name='blog-home'),
+    path('signup/', views.signup, name='signup'),
 ]
