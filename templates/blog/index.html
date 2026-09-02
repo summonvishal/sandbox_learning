@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Welcome | Beautiful Experience</title>
+  <title>Blog | Beautiful Experience</title>
   <style>
     * {
       margin: 0;
@@ -14,26 +14,25 @@
 
     body {
       min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
       background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
       color: #f8fafc;
-      overflow-x: hidden;
+      display: flex;
+      flex-direction: column;
     }
 
-    .welcome-card {
+    /* Top Navigation Bar */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.25rem 2rem;
       background: rgba(30, 41, 59, 0.7);
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 24px;
-      padding: 3rem 2.5rem;
-      max-width: 480px;
-      width: 90%;
-      text-align: center;
-      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-      animation: fadeIn 0.8s ease-out;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      position: sticky;
+      top: 0;
+      z-index: 100;
     }
 
     .badge {
@@ -47,42 +46,32 @@
       background: rgba(56, 189, 248, 0.1);
       border: 1px solid rgba(56, 189, 248, 0.2);
       border-radius: 9999px;
-      margin-bottom: 1.5rem;
     }
 
-    h1 {
-      font-size: 2.5rem;
-      font-weight: 800;
-      line-height: 1.2;
-      margin-bottom: 1rem;
-      background: linear-gradient(to right, #ffffff, #94a3b8);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    p {
-      color: #94a3b8;
-      font-size: 1.05rem;
-      line-height: 1.6;
-      margin-bottom: 2rem;
-    }
-
-    .cta-group {
+    .nav-user-actions {
       display: flex;
-      flex-direction: column;
+      align-items: center;
       gap: 1rem;
     }
 
+    .user-greeting {
+      color: #94a3b8;
+      font-size: 0.95rem;
+    }
+
+    /* Buttons */
     .btn {
-      display: inline-block;
-      width: 100%;
-      padding: 0.875rem 1.5rem;
-      font-size: 1rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.5rem 1.25rem;
+      font-size: 0.9rem;
       font-weight: 600;
       text-decoration: none;
-      border-radius: 12px;
+      border-radius: 10px;
       transition: all 0.25s ease;
       cursor: pointer;
+      border: none;
     }
 
     .btn-primary {
@@ -94,7 +83,6 @@
     .btn-primary:hover {
       background: #7dd3fc;
       transform: translateY(-2px);
-      box-shadow: 0 6px 20px 0 rgba(56, 189, 248, 0.5);
     }
 
     .btn-secondary {
@@ -105,61 +93,216 @@
 
     .btn-secondary:hover {
       background: rgba(255, 255, 255, 0.05);
-      border-color: rgba(255, 255, 255, 0.3);
+    }
+
+    .btn-danger {
+      background: rgba(239, 68, 68, 0.15);
+      color: #f87171;
+      border: 1px solid rgba(239, 68, 68, 0.3);
+    }
+
+    .btn-danger:hover {
+      background: #ef4444;
+      color: #ffffff;
       transform: translateY(-2px);
     }
 
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+    /* Main Container */
+    .container {
+      max-width: 900px;
+      width: 90%;
+      margin: 2.5rem auto;
+      flex-grow: 1;
+      animation: fadeIn 0.8s ease-out;
     }
 
-    @media (max-width: 480px) {
-      .welcome-card {
-        padding: 2rem 1.5rem;
-      }
-      h1 {
-        font-size: 2rem;
-      }
+    .page-title {
+      font-size: 2.25rem;
+      font-weight: 800;
+      margin-bottom: 0.5rem;
+      background: linear-gradient(to right, #ffffff, #94a3b8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .page-subtitle {
+      color: #94a3b8;
+      font-size: 1.05rem;
+      margin-bottom: 2rem;
+    }
+
+    /* Create Post Card */
+    .create-card {
+      background: rgba(30, 41, 59, 0.7);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      padding: 1.75rem;
+      margin-bottom: 2.5rem;
+      box-shadow: 0 15px 35px -10px rgba(0, 0, 0, 0.3);
+    }
+
+    .create-card h2 {
+      font-size: 1.35rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: #f8fafc;
+    }
+
+    .form-group {
+      margin-bottom: 1rem;
+    }
+
+    .form-input {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 10px;
+      color: #f8fafc;
+      font-size: 0.95rem;
+      outline: none;
+      transition: border-color 0.2s ease;
+    }
+
+    .form-input:focus {
+      border-color: #38bdf8;
+    }
+
+    /* Blog List */
+    .blog-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .blog-card {
+      background: rgba(30, 41, 59, 0.7);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      padding: 1.75rem;
+      box-shadow: 0 15px 35px -10px rgba(0, 0, 0, 0.3);
+      transition: transform 0.3s ease, border-color 0.3s ease;
+    }
+
+    .blog-card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(56, 189, 248, 0.4);
+    }
+
+    .post-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.85rem;
+      color: #38bdf8;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .post-author {
+      color: #94a3b8;
+    }
+
+    .post-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #f8fafc;
+      margin-bottom: 0.75rem;
+    }
+
+    .post-content {
+      color: #cbd5e1;
+      font-size: 1rem;
+      line-height: 1.6;
+      white-space: pre-wrap;
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 3rem;
+      color: #94a3b8;
+      background: rgba(30, 41, 59, 0.4);
+      border-radius: 20px;
+      border: 1px dashed rgba(255, 255, 255, 0.15);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 640px) {
+      .navbar { padding: 1rem; }
+      .user-greeting { display: none; }
+      .page-title { font-size: 1.75rem; }
     }
   </style>
 </head>
 <body>
 
-  <main class="welcome-card">
-    <span class="badge">Django Project</span>
+  <!-- Top Navigation Bar -->
+  <nav class="navbar">
+    <div class="brand">
+      <span class="badge">Blog</span>
+    </div>
 
-    {% if user.is_authenticated %}
-      <!-- Content shown when user IS logged in -->
-      <h1>Welcome, {{ user.username }}!</h1>
-      <p>You are successfully logged into your account.</p>
-
-      <div class="cta-group">
-        <a href="/admin/" class="btn btn-primary">Admin Portal</a>
-        
-        <!-- Django requires POST for logout security -->
-        <form action="{% url 'logout' %}" method="post" style="width: 100%;">
+    <div class="nav-user-actions">
+      {% if user.is_authenticated %}
+        <span class="user-greeting">Logged in as <strong>{{ user.username }}</strong></span>
+                
+        <!-- Top Right Logout Button -->
+        <form action="{% url 'logout' %}" method="post" style="display: inline;">
           {% csrf_token %}
           <button type="submit" class="btn btn-danger">Log Out</button>
         </form>
-      </div>
+      {% else %}
+        <a href="{% url 'login' %}" class="btn btn-secondary">Log In</a>
+        <a href="{% url 'signup' %}" class="btn btn-primary">Sign Up</a>
+      {% endif %}
+    </div>
+  </nav>
 
-    {% else %}
-      <!-- Content shown when user IS NOT logged in -->
-      <h1>Welcome Aboard</h1>
-      <p>Your Django web application is up and running perfectly.</p>
+  <!-- Main Container -->
+  <main class="container">
+    <h1 class="page-title">Community Blog</h1>
+    <p class="page-subtitle">Share your ideas or explore posts created by others.</p>
 
-      <div class="cta-group">
-        <a href="{% url 'login' %}" class="btn btn-primary">Log In</a>
-        <a href="{% url 'signup' %}" class="btn btn-secondary">Sign Up</a>
-      </div>
-    {% endif %}
+    <!-- Create Blog Form -->
+    <section class="create-card">
+      <h2>Create a New Post</h2>
+      <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+          {{ form.title }}
+        </div>
+        <div class="form-group">
+          {{ form.content }}
+        </div>
+        <button type="submit" class="btn btn-primary" style="width: 100%;">Publish Post</button>
+      </form>
+    </section>
+
+    <!-- Blog Posts Feed -->
+    <section class="blog-list">
+      {% for post in posts %}
+        <article class="blog-card">
+          <div class="post-meta">
+            <span>{{ post.created_at|date:"M d, Y • H:i" }}</span>
+            <span class="post-author">By {{ post.author.username }}</span>
+          </div>
+          <h2 class="post-title">{{ post.title }}</h2>
+          <p class="post-content">{{ post.content }}</p>
+        </article>
+      {% empty %}
+        <div class="empty-state">
+          <p>No blog posts found. Be the first to publish one above!</p>
+        </div>
+      {% endfor %}
+    </section>
   </main>
 
 </body>
